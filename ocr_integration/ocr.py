@@ -1,4 +1,3 @@
-import sys
 import json
 import easyocr
 import argparse
@@ -30,7 +29,7 @@ def main():
     parser = argparse.ArgumentParser(description='Extract text from a given image')
     parser.add_argument('-f', '--file', help='Image path', required=True)
     args = parser.parse_args()
-    sys.stdout.write(json.dumps(extract_text([args.file]), indent=2))
+    print(json.dumps(extract_text([args.file]), indent=2))
 
 if __name__ == '__main__':
     main()
