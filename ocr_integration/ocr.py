@@ -3,42 +3,44 @@ import os
 import json
 import easyocr
 import warnings
+import argparse
 
+# Console Arguments
+parser = argparse.ArgumentParser(description='Extract text from a given image')
+parser.add_argument('-f', '--file', help='Image path', required=True)
 
-# Initialization
+# Configurations
 SCRIPT_DIR = os.path.dirname(__file__)
-DEFAULT_ATTACHMENTS_DIR = "../discord_integration/attachments"
-ATTACHMENTS_DIR = os.getenv('ATTACHMENTS_DIR') or os.path.join(SCRIPT_DIR, DEFAULT_ATTACHMENTS_DIR)
 warnings.filterwarnings('ignore')
 
 
-# Extract Text from Image
-def extract_text(file_names):
-    results = [];
-    img_file_names = [];
+def extract_text(img_paths):
+    """
+    Extract Texts from Images
 
-    if isinstance(file_names, list):
-        img_file_names = file_names
-    else:
-        img_file_names.append(file_names)
+    Args:
+        image_path: list of image paths
     
-    for img_file_name in img_file_names:
-        img_path = os.path.join(ATTACHMENTS_DIR, img_file_name)
+    Returns:
+        results: list of elements containing extracted text for each image
+    
+    """
 
-        reader = easyocr.Reader(['en'], verbose=False)
+    results = []
+    reader = easyocr.Reader(['en'], verbose=False)
+
+    for img_path in img_paths:
         img_texts = reader.readtext(img_path, detail = 0)
-        results.append({ img_file_name : img_texts })
+        results.append({ 'image' : img_path, 'texts' : img_texts })
 
     return results
 
 
-# Via Console
-console_out = []
-args = len(sys.argv)
-if args >= 2:
-    images = [];
-    for i in range(1, args):
-        images.append(sys.argv[i])
-    
-    sys.stdout.write(json.dumps(extract_text(images), indent=2))
+# Console
+def main():
+    args = parser.parse_args()
+    sys.stdout.write(json.dumps(extract_text([args.file]), indent=2))
     sys.stdout.write('\n')
+
+if __name__ == '__main__':
+    main()
