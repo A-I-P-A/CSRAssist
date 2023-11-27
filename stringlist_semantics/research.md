@@ -1,4 +1,3 @@
-
 # 1. Introduction
 In this document, I explore prompt engineering techniques for training ChatGPT to identify TV brands and models from given information.
 The goal is to improve the model's accuracy and consistency in extracting relevant details.
@@ -11,18 +10,20 @@ and found additional insights here: https://www.unite.ai/prompt-engineering-in-c
 
 After several iterations, I identified the below pattern that improve prompt understanding.
 ## Example
+```
 User
-
 You are an expert in TV selling. Based on the below TV information, retrieve the two strings,
 one for the brand name and the other for the model name of the TV
-###[{"6_1.jpg": ["8","MSUNG","Hali","ONd}","CerbifiedUHL","UHDTV","CG","CLASS","TNu710O ","7SERIES"]}]###
+###
+[{"6_1.jpg": ["8","MSUNG","Hali","ONd}","CerbifiedUHL","UHDTV","CG","CLASS","TNu710O ","7SERIES"]}]
+###
 Brand:
 Model:
 
 ChatGPT
 Brand: SAMSUNG
 Model: TNu710O7SERIES
-
+```
 
 # 3. Learnings from above research
 1) **Punctuations** not needed at the end of the sentence. Spaces can do the work.
@@ -42,7 +43,7 @@ Building on the learnings, I refined the prompt. The idea is to get consistent i
 ## Examples
 I provide examples of prompts and model responses using different TV information. The model successfully 
 identifies TV brands and models _while handling cases where the information does not correspond to a TV_.
-
+```
 User
 You are a manufacturer of all the brands of TV. Identify the brand and model of the TV from the given information. Just say "not a tv" in case the information is anything else than tv.
 [{"6_1.jpg":["8","MSUNG","Hali","ONd}","CerbifiedUHL","UHDTV","CG","CLASS","TNu710O ","7SERIES"]}]
@@ -65,25 +66,31 @@ Model:
 ChatGPT
 Brand: Kogan
 Model: RH9310
-
+```
+```
 User
 [{"6_6.jpg":["ELP", "AMD", "ASLE", "Tupacking", "protiction", "roid", "RH"]}]
+
 ChatGPT
 Brand: Not a TV brand
 Model: Not a TV model
-
+```
+```
 User
 [{"6_5.jpg":["Kogan", "24", "inches", "4a", "and", "roid", "RH", "9310"]}]
+
 ChatGPT
 Brand: Kogan
 Model: RH9310
-
+```
+```
 User
 [{"6_4.jpg":["Hoveg", "Muj", "r", "4a", "TA", "e", "enanaeautdddeutet", "Decob", "iw",  "Du", "dun", "Telaele", "t" ]}]
 
 ChatGPT
 Brand: Not a TV brand
 Model: Not a TV model
+```
 
 # 6. Next steps
 The next steps involve expanding the dataset with more images (need not be boxes), extracting data from the tool,
