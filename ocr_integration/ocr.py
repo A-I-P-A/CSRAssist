@@ -2,12 +2,15 @@ import json
 import easyocr
 import argparse
 
-def extract_text(img_paths):
+from typing import List
+
+
+def extract_text(img_paths: List[str]) -> List[dict]:
     """
     Extract Texts from Images
 
     Args:
-        image_path: list of image paths
+        img_paths: list of image paths
     
     Returns:
         results: list of elements containing extracted text for each image
@@ -18,8 +21,8 @@ def extract_text(img_paths):
     reader = easyocr.Reader(['en'], verbose=False)
 
     for img_path in img_paths:
-        img_texts = reader.readtext(img_path, detail = 0)
-        results.append({ 'image' : img_path, 'texts' : img_texts })
+        img_texts = reader.readtext(img_path, detail=0)
+        results.append({'image': img_path, 'texts': img_texts})
 
     return results
 
