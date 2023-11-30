@@ -4,6 +4,10 @@ import os
 import requests
 import signal
 
+import sys
+sys.path.insert(0, '..')
+from ocr_integration import ocr
+
 import pprint
 
 CHANNEL_ID = 1176399154210160652
@@ -50,6 +54,8 @@ async def on_message(message):
             with open(download_path, 'wb') as file:
                 file.write(response.content)
             await message.channel.send(f'Downloaded file {attachment.filename}')
+            text = ocr.extract_text([download_path])
+            await message.channel.send(f'OCR text: {text}')
 
         await message.channel.send(f'ACK message of len {len(message.content)}')
         pprint.pprint(message)
