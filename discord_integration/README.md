@@ -12,4 +12,4 @@ message, and then attempts to extract any text contained within the image.
 
 ## Quickstart
 * Follow base README.md quickstart instructions, then proceed.
-* `DISCORD_BOT_TOKEN=$(cat ~/secrets/aipa.csrassist.test.txt) python example_bot.py`
+* `DISCORD_BOT_TOKEN=$(cat ~/secrets/aipa.csrassist.discord.test.token.txt) python discord_bot.py`
