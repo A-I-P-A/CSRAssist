@@ -33,8 +33,6 @@ async def shutdown_bot():
     await channel.send('CSRAssist going offline 😴')
     await client.close()
 
-signal.signal(signal.SIGINT, signal_handler)
-signal.signal(signal.SIGTERM, signal_handler)
 
 @client.event
 async def on_ready():
@@ -61,7 +59,14 @@ async def on_message(message):
         pprint.pprint(message)
 
 
-token = os.getenv('BOT_TOKEN')
-if not token:
-    raise Exception("BOT_TOKEN not defined")
-client.run(token)
+def register_termination_handlers():
+    signal.signal(signal.SIGINT, signal_handler)
+    signal.signal(signal.SIGTERM, signal_handler)
+
+
+if __name__ == "__main__":
+    token = os.getenv('DISCORD_BOT_TOKEN')
+    if not token:
+        raise Exception("DISCORD_BOT_TOKEN not defined")
+    register_termination_handlers()
+    client.run(token)
