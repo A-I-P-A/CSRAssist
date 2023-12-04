@@ -10,13 +10,13 @@ import sys
 sys.path.insert(0, '..')
 from ocr_integration import ocr
 
-SERVER_PORT = 3000
-ATTACHMENTS_DIR = "attachments"
+SERVER_PORT: int = 3000
+ATTACHMENTS_DIR: str = "attachments"
 
-token = os.getenv("SLACK_BOT_TOKEN")
-app = AsyncApp(
-    token = token,
-    signing_secret = os.getenv("SLACK_SIGNING_SECRET")
+token: str = os.getenv("SLACK_BOT_TOKEN")
+app: AsyncApp = AsyncApp(
+    token=token,
+    signing_secret=os.getenv("SLACK_SIGNING_SECRET")
 )
 
 @app.event("message")
