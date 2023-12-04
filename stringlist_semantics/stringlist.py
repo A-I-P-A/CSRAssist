@@ -10,8 +10,7 @@ def chat_completion(user_message):
         model="gpt-3.5-turbo-1106",
         messages=[user_message]
     )
-    print(response)
-    print(response.choices[0].message.content)
+    return response.choices[0].message.content
 
 def main():
     user_message = {
