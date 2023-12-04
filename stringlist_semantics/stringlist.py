@@ -4,11 +4,6 @@ import os
 import config
 import json
 
-api_key=config.API_KEY
-token = os.environ.get("api_key")
-if not token:
-    raise Exception("api_key not defined in environment variable.")
-openai.api_key = token
 
 def chat_completion(user_message):
     response = openai.chat.completions.create(
