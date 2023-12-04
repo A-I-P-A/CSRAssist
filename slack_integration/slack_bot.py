@@ -39,10 +39,12 @@ task_state: str = "OPEN"  # TODO replace this with something more scalable, this
 async def event_message(event: dict, say) -> None:
     global task_state
     user_message: str = event.get('text')
+    user_message_timestamp: int = int(float(event.get('ts')))
+
     attachments: List[dict] = []
     if event.get('files'):
         for file_info in event['files']:
-            print('---------------------------')
+            print('-----------NEW FILE----------------')
             pprint.pprint(file_info)
             file_name: str = file_info['name']
             download_path: str = os.path.join(ATTACHMENTS_DIR, file_name)
@@ -75,9 +77,10 @@ async def event_message(event: dict, say) -> None:
             discord_payload['task_info'] = tv_description
             discord_payload['task_request_channel'] = 'Slack'
             discord_payload['user_message'] = user_message
+            discord_payload['slack_timestamp'] = user_message_timestamp
+            discord_payload['bot_timestmap'] = int(float(time.time()))
             pub_payload = json.dumps(discord_payload)
-            print(pub_payload)
-            aipa.publish_message('discord', pub_payload)
+            aipa.publish_message(channel='discord', message=pub_payload)
     else:
         pprint.pprint(event)
 

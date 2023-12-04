@@ -22,11 +22,13 @@ client = discord.Client(intents=intents)
 
 def signal_handler(sig, frame):
     print("Received signal:", sig)
+    long_poll.stop()
     loop = asyncio.get_event_loop()
     if loop.is_running():
         loop.create_task(shutdown_bot())
     else:
         loop.run_until_complete(shutdown_bot())
+    aipa.stop_channel_listener('discord')
 
 async def shutdown_bot():
     print("Bot is shutting down...")
@@ -35,20 +37,24 @@ async def shutdown_bot():
     await channel.send('CSRAssist going offline 😴')
     await client.close()
 
-@tasks.loop(seconds=5)
+@tasks.loop(seconds=10)
 async def long_poll():
-    print("Polling...")
     channel = client.get_channel(CHANNEL_ID)
-    msgs = aipa.check_for_messages_nonblocking(channel='discord')
-    if msgs:
-        pprint.pprint(msgs)
-        await channel.send(msgs)
+    draining = True
+    while draining:
+        msgs = aipa.get_message_from_channel('discord')
+        if msgs:
+            pprint.pprint(msgs)
+            await channel.send(msgs)
+        else:
+            draining = False
 
 @client.event
 async def on_ready():
     print(f'We have logged in as {client.user}')
     channel = client.get_channel(CHANNEL_ID)
     await channel.send('CSRAssist online 👋🏽')
+    aipa.initialize_channel_listener('discord')
     long_poll.start()
 
 @client.event
