@@ -2,6 +2,13 @@ import openai
 import json
 
 def chat_completion(user_message):
+    """
+    Get chat completion using OpenAI API.
+    Arguments:
+        user_message (dict): The user's message
+    Returns:
+        The completion message.
+    """
     response = openai.chat.completions.create(
         model="gpt-3.5-turbo-1106",
         messages=[user_message]
@@ -9,6 +16,13 @@ def chat_completion(user_message):
     return response.choices[0].message.content
 
 def describe_tv(tv_info):
+    """
+    Describe the TV based on the provided information.
+    Arguments:
+        tv_info (list): List of strings containing TV information.
+    Returns:
+        Brand and model of the TV.
+    """
     user_message = {
         "role": "user",
         "content": 
@@ -19,6 +33,7 @@ def describe_tv(tv_info):
     return chat_completion(user_message)
 
 def main():
+    # Extract brand and model information from the TV info
     result = describe_tv(["8","MSUNG","Hali","ONd}","CerbifiedUHL","UHDTV","CG","CLASS","TNu710O ","7SERIES"])
     print(result)
 
