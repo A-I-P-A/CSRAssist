@@ -1,12 +1,14 @@
 import asyncio
 import discord
+from discord.ext import tasks
+import json
 import os
 import requests
 import signal
 
 import sys
 sys.path.insert(0, '..')
-from ocr_integration import ocr
+from router import aipa
 
 import pprint
 
@@ -33,12 +35,21 @@ async def shutdown_bot():
     await channel.send('CSRAssist going offline 😴')
     await client.close()
 
+@tasks.loop(seconds=5)
+async def long_poll():
+    print("Polling...")
+    channel = client.get_channel(CHANNEL_ID)
+    msgs = aipa.check_for_messages_nonblocking(channel='discord')
+    if msgs:
+        pprint.pprint(msgs)
+        await channel.send(msgs)
 
 @client.event
 async def on_ready():
     print(f'We have logged in as {client.user}')
     channel = client.get_channel(CHANNEL_ID)
     await channel.send('CSRAssist online 👋🏽')
+    long_poll.start()
 
 @client.event
 async def on_message(message):
@@ -57,7 +68,6 @@ async def on_message(message):
 
         await message.channel.send(f'ACK message of len {len(message.content)}')
         pprint.pprint(message)
-
 
 def register_termination_handlers():
     signal.signal(signal.SIGINT, signal_handler)
