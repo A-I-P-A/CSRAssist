@@ -29,7 +29,7 @@ message, and then attempts to extract any text contained within the image.
 12. Start your slack application locally by providing `SLACK_BOT_TOKEN` and `SLACK_SIGNING_SECRET`
       * It will start on port 3000 bt default
     
-14. Download ngrok and start it on the same port your slack applition started 
+14. Download `ngrok` and start it on the same port your slack applition started 
       * Ex: `ngrok http 3000`
       * In the console, ngrok will print a dynamically assigned public domain URL for port forwarding
       * Ex: https://90e9-111-223-146-131.ngrok.io
@@ -44,7 +44,7 @@ message, and then attempts to extract any text contained within the image.
       * Ex: https://90e9-111-223-146-131.ngrok.io/slack/events
 	    
       * Once you click outside, it will start to verify the URL
-      * If the URL is not verified, try it again and/or generate another URL via ngrok and provide the new URL with the correct format
+      * If the URL is not verified, try it again and/or generate another URL via `ngrok` and provide the new URL with the correct format
 	
 20. Scroll down and add "Bot User Events" under "Subscribe to bot events"
 21. Select "message:channels" event from the dropdown
@@ -62,7 +62,7 @@ message, and then attempts to extract any text contained within the image.
         * Please note that these responses may change in the future
 	
 #### Recurring configurations: 
-If you dont have a paid ngrok, most probably you will have update the ngork URL each time
+If you dont have a paid `ngrok`, most probably you will have update the `ngrok` URL each time
 Therefore you have to do the following in order to update the formwarding URL
 
 1. 	Go to https://api.slack.com/apps
