@@ -85,4 +85,4 @@ async def event_message(event: dict, say) -> None:
         pprint.pprint(event)
 
 if __name__ == "__main__":
-    app.start(port = int(os.getenv("SERVER_PORT", SERVER_PORT)))
+    app.start(port = SERVER_PORT)
