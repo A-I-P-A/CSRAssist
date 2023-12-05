@@ -40,5 +40,5 @@ async def event_message(event, say):
     print(f'Message processing completed. client_msg_id: {event["client_msg_id"]}')
 
 if __name__ == "__main__":
-    app.start(port = int(os.getenv("SERVER_PORT", SERVER_PORT)))
+    app.start(port = SERVER_PORT)
 
