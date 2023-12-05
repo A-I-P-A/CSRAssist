@@ -26,7 +26,7 @@ message, and then attempts to extract any text contained within the image.
 	    Note: You can any other permission you need
 10. Go to "Settings" > "Basic Information" > "App Credentials"
 11. Copy the Signing Secret (i.e. `SLACK_SIGNING_SECRET`)
-12. Start your slack application locally by providing SLACK_BOT_TOKEN and SLACK_SIGNING_SECRET
+12. Start your slack application locally by providing `SLACK_BOT_TOKEN` and `SLACK_SIGNING_SECRET`
       * It will start on port 3000 bt default
     
 14. Download ngrok and start it on the same port your slack applition started 
@@ -62,7 +62,7 @@ message, and then attempts to extract any text contained within the image.
         * Please note that these responses may change in the future
 	
 #### Recurring configurations: 
-If you dont have a paid ngork, most probably you will have update the ngork URL each time
+If you dont have a paid ngrok, most probably you will have update the ngork URL each time
 Therefore you have to do the following in order to update the formwarding URL
 
 1. 	Go to https://api.slack.com/apps
