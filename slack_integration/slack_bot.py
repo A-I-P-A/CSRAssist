@@ -30,7 +30,7 @@ async def event_message(event, say):
         file_name = file['name']
         download_path = os.path.join(ATTACHMENTS_DIR, file_name)
         response = requests.get(file['url_private_download'], headers={'Authorization': 'Bearer %s' % token})
-        response.raise_for_status
+        response.raise_for_status()
         with open(download_path, 'wb') as file:
             file.write(response.content)
         await say(f'Downloaded file {file_name}')
