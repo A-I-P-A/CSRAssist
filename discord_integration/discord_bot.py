@@ -63,14 +63,6 @@ async def on_message(message):
         return
     else:
         print(message.content)
-        for attachment in message.attachments:
-            response = requests.get(attachment.url)
-            download_path = os.path.join(ATTACHMENTS_DIR, attachment.filename)
-            with open(download_path, 'wb') as file:
-                file.write(response.content)
-            await message.channel.send(f'Downloaded file {attachment.filename}')
-            text = ocr.extract_text([download_path])
-            await message.channel.send(f'OCR text: {text}')
 
         await message.channel.send(f'ACK message of len {len(message.content)}')
         pprint.pprint(message)
