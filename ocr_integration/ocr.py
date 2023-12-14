@@ -1,11 +1,9 @@
+import argparse
 import json
 import easyocr
-import argparse
-
-from typing import List
 
 
-def extract_text(img_paths: List[str]) -> List[dict]:
+def extract_text(img_paths: list[str]) -> list[dict]:
     """
     Extract Texts from Images
 
