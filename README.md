@@ -5,6 +5,12 @@ Tooling to assist CSRs
 * `poetry shell`
 * `poetry install`
 * Follow individual subdirectory quickstart steps
+* Run `pylint` and make sure code is up to the standards before commit changes to git
+
+  Ex:
+  - `pylint ocr_integration/*.py`
+  - `cd ocr_integration && pylint ocr.py`
+
 
 ## Slack-Discord-Router PoC
 
