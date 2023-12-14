@@ -5,7 +5,9 @@ Tooling to assist CSRs
 * `poetry shell`
 * `poetry install`
 * Follow individual subdirectory quickstart steps
-* Run `pylint` and make sure code is up to the standards before commit changes to git
+* Run `pylint` and make sure code is up to the standards before commit changes to git. If you encounter any linter errors that
+  you feel are due to the rules being too strict, feel free to annotate your code with exclusion pragmas, or we may consider
+  changing the rules itself - either way, please discuss during code review.
 
   Ex:
   - `pylint ocr_integration/*.py`
