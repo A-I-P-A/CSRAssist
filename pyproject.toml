@@ -14,6 +14,7 @@ langchain = "^0.0.339"
 easyocr = "^1.7.1"
 slack-bolt = "^1.18.1"
 imageio = {extras = ["pyav"], version = "^2.33.0"}
+redis = "^5.0.1"
 
 
 [tool.poetry.group.dev.dependencies]
