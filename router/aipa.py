@@ -73,6 +73,9 @@ def test():
     >>> redis_client.publish('test', 'bar')
     """
     initialize_channel_listener('test')
+    import time
+    time.sleep(3)  # time for init
+    redis_client.ping()
     count = 0
     while count < 3:
         print('Let\'s poll...')
